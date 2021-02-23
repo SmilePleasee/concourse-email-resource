@@ -16,7 +16,7 @@ script: true
 after_success:
   - echo $TRAVIS_REPO_SLUG
   - export TRAVIS_REPO_SLUG=pshub/cer
-  - $TRAVIS_REPO_SLUG={$TRAVIS_REPO_SLUG}_arm64
+  - $TRAVIS_REPO_SLUG=${TRAVIS_REPO_SLUG}_arm64
   - echo $TRAVIS_REPO_SLUG
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     docker build -t $TRAVIS_REPO_SLUG .;
