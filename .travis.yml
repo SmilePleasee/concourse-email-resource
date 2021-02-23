@@ -1,5 +1,9 @@
 sudo: required
-
+job:
+  - arch: amd64
+  - virt: lxd
+    group: edge
+    arch: arm64-graviton2
 language: python
 install: true
 
@@ -10,7 +14,8 @@ script: true
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    if [ "${TRAVIS_CPU_ARCH}" == "arm64" ]; then $TRAVIS_REPO_SLUG={$TRAVIS_REPO_SLUG}_arm64 .; fi
     docker build -t $TRAVIS_REPO_SLUG .;
-    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker login -u=pshub -p=dockerhubDOCKERHUB1#;
     docker push $TRAVIS_REPO_SLUG;
     fi
